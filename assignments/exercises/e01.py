@@ -3,6 +3,8 @@ Simple TensorFlow exercises
 You should thoroughly test your code
 """
 
+#test
+
 import tensorflow as tf
 
 ###############################################################################
