@@ -31,11 +31,11 @@ def zero(): return tf.constant(0.0)
 
 out = tf.case({tf.less(x,y): a, tf.greater(x,y): s}, default = zero, exclusive=True)
 
-with tf.Session() as sess:
-    sess.run(tf.global_variables_initializer())
-    print(sess.run(x))
-    print(sess.run(y))
-    print(sess.run(out))
+#with tf.Session() as sess:
+#    sess.run(tf.global_variables_initializer())
+#    print(sess.run(x))
+#    print(sess.run(y))
+#    print(sess.run(out))
 
 ###############################################################################
 # 1c: Create the tensor x of the value [[0, -2, -1], [0, 1, 2]] 
@@ -44,7 +44,13 @@ with tf.Session() as sess:
 # Hint: Look up tf.equal().
 ###############################################################################
 
-# YOUR CODE
+x = [[0, -2, -1], [0, 1, 2]]
+y = [[0, 0, 0], [0, 0, 0]]
+
+out = tf.equal(x, y)
+
+with tf.Session() as sess:
+    print(sess.run(out))
 
 ###############################################################################
 # 1d: Create the tensor x of value 
