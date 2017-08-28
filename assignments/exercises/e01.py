@@ -22,7 +22,20 @@ out = tf.cond(tf.greater(x, y), lambda: tf.add(x, y), lambda: tf.subtract(x, y))
 # Hint: Look up tf.case().
 ###############################################################################
 
-# YOUR CODE
+x = tf.Variable(tf.random_uniform([], minval=-1.0, maxval=1.0))
+y = tf.Variable(tf.random_uniform([], minval=-1.0, maxval=1.0))
+
+def a(): return tf.add(x,y)
+def s(): return tf.subtract(x,y)
+def zero(): return tf.constant(0.0)
+
+out = tf.case({tf.less(x,y): a, tf.greater(x,y): s}, default = zero, exclusive=True)
+
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    print(sess.run(x))
+    print(sess.run(y))
+    print(sess.run(out))
 
 ###############################################################################
 # 1c: Create the tensor x of the value [[0, -2, -1], [0, 1, 2]] 
