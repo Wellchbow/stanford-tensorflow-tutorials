@@ -73,6 +73,15 @@ x = [29.05088806,  27.61298943,  31.19073486,  29.35532951,
   27.88236427,  20.56035233,  30.20379066,  29.51215172,
   33.71149445,  28.59134293,  36.05556488,  28.66994858]
 
+y = [30]
+
+where = tf.where(tf.greater(x,y))
+
+gather = tf.gather(x, where)
+
+#with tf.Session() as sess:
+#	print(sess.run(where))
+#	print(sess.run(gather))
 
 ###############################################################################
 # 1e: Create a diagnoal 2-d tensor of size 6 x 6 with the diagonal values of 1,
@@ -80,7 +89,11 @@ x = [29.05088806,  27.61298943,  31.19073486,  29.35532951,
 # Hint: Use tf.range() and tf.diag().
 ###############################################################################
 
-# YOUR CODE
+a = tf.range(1, 7, 1)
+b = tf.diag(a)
+
+with tf.Session() as sess:
+	print(sess.run(b))
 
 ###############################################################################
 # 1f: Create a random 2-d tensor of size 10 x 10 from any distribution.
