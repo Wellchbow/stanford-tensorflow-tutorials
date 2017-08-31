@@ -24,7 +24,7 @@ aout = tf.cond(tf.greater(ax, ay), lambda: tf.add(ax, ay), lambda: tf.subtract(a
 ###############################################################################
 # 1b: Create two 0-d tensors x and y randomly selected from the range [-1, 1).
 # Return x + y if x < y, x - y if x > y, 0 otherwise.
-# Hint: Look up tf.case().
+# Hint: sook up tf.case().
 ###############################################################################
 
 bx = tf.Variable(tf.random_uniform([], minval=-1.0, maxval=1.0))
@@ -107,10 +107,10 @@ eout = tf.diag(ex)
 fx = tf.Variable(tf.random_normal([10,10], mean=10, stddev=1))
 fout = tf.matrix_determinant(fx)
 
-with tf.Session() as sess:
-	sess.run(tf.global_variables_initializer())
-	print(sess.run(fx))
-	print(sess.run(fout))
+#with tf.Session() as sess:
+#	sess.run(tf.global_variables_initializer())
+#	print(sess.run(fx))
+#	print(sess.run(fout))
 
 
 ###############################################################################
@@ -119,7 +119,12 @@ with tf.Session() as sess:
 # Hint: use tf.unique(). Keep in mind that tf.unique() returns a tuple.
 ###############################################################################
 
-# YOUR CODE
+gx = [5, 2, 3, 5, 10, 6, 2, 3, 4, 2, 1, 1, 0, 9]
+gy = tf.unique(gx)
+gout = gy.y
+
+#with tf.Session() as sess:
+#	print(sess.run(gout))
 
 ###############################################################################
 # 1h: Create two tensors x and y of shape 300 from any normal distribution,
@@ -131,4 +136,20 @@ with tf.Session() as sess:
 # Hint: see the Huber loss function in the lecture slides 3.
 ###############################################################################
 
-# YOUR CODE
+hx = tf.Variable(tf.random_normal([300], mean=10, stddev=1))
+hy = tf.Variable(tf.random_normal([300], mean=10, stddev=1))
+
+hsub = tf.subtract(hx, hy)
+
+hmean = tf.reduce_mean(hsub)
+
+def hf1(): return tf.reduce_mean(tf.square(hsub))
+def hf2(): return tf.reduce_sum(tf.abs(hsub))
+
+hout = tf.cond(tf.less(hmean, 0), hf1, hf2)
+
+with tf.Session() as sess:
+	sess.run(tf.global_variables_initializer())
+	print(sess.run(hx))
+	print(sess.run(hy))
+	print(sess.run(hout))
